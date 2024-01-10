@@ -45,6 +45,10 @@ class LivePlayController extends GetxController {
       // add delay to avoid hero animation lag
       int delay = (Platform.isWindows || Platform.isLinux) ? 500 : 0;
       Timer(Duration(milliseconds: delay), () {
+        // if controller is closed, should abort
+        if (isClosed) {
+          return;
+        }
         videoController = VideoController(
           playerKey: playerKey,
           room: room,
